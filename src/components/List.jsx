@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Pill from "./Pill";
 
-export default function List({ ...list }) {
+export default function List({ keywords, setKeywords, ...list }) {
   const {
     company,
     logo,
@@ -18,69 +18,72 @@ export default function List({ ...list }) {
     tools,
   } = list;
 
+  const tabletsList = [role, level, ...languages, ...tools];
+
+  const display = () => {
+    const skillSet = new Set(tabletsList);
+    return keywords.every((keyword) => skillSet.has(keyword));
+  };
+
+  const addSearch = (item) => {
+    if (!keywords.includes(item)) {
+      setKeywords([...keywords, item]);
+    }
+  };
+
   return (
-    <Root>
-      {featured && (
-        <Mask>
-          <FeaturedLine />
-        </Mask>
-      )}
+    display() && (
+      <Root>
+        {featured && (
+          <Mask>
+            <FeaturedLine />
+          </Mask>
+        )}
 
-      <Card>
-        <Logo src={`.${logo}`} alt={`${company} logo`} />
+        <Card>
+          <Logo src={`.${logo}`} alt={`${company} logo`} />
 
-        <JobDetails>
-          <Header>
-            <CompanyName>{company}</CompanyName>
+          <JobDetails>
+            <Header>
+              <CompanyName>{company}</CompanyName>
 
-            {isNew && <Pill type="new" />}
-            {featured && <Pill type="featured" />}
-          </Header>
+              {isNew && <Pill type="new" />}
+              {featured && <Pill type="featured" />}
+            </Header>
 
-          <PositionName>{position}</PositionName>
+            <PositionName>{position}</PositionName>
 
-          <AdditionalInfo>
-            {postedAt}
-            <GrayDot />
-            {contract}
-            <GrayDot />
-            {location}
-          </AdditionalInfo>
-        </JobDetails>
+            <AdditionalInfo>
+              {postedAt}
+              <GrayDot />
+              {contract}
+              <GrayDot />
+              {location}
+            </AdditionalInfo>
+          </JobDetails>
 
-        <Divider />
+          <Divider />
 
-        <Tablets>
-          <Tablet>{role}</Tablet>
-
-          <Tablet>{level}</Tablet>
-
-          {languages &&
-            languages.map((language, i) => (
-              <Tablet key={`language-${i}`}>{language}</Tablet>
-            ))}
-
-          {tools &&
-            tools.map((tool, i) => <Tablet key={`tool-${i}`}>{tool}</Tablet>)}
-        </Tablets>
-      </Card>
-    </Root>
+          <Tablets>
+            {tabletsList.length > 0 &&
+              tabletsList.map((item, i) => (
+                <Tablet key={`item-${i}`} onClick={() => addSearch(item)}>
+                  {item}
+                </Tablet>
+              ))}
+          </Tablets>
+        </Card>
+      </Root>
+    )
   );
 }
 
 const Root = styled.div`
   position: relative;
   margin: 25px auto;
-  max-width: 1110px;
-  height: 152px;
-
-  @media (max-width: 1110px) {
-    margin: 25px 16px;
-  }
 
   @media (max-width: 640px) {
     margin: 40px auto;
-    max-width: 330px;
     height: 258px;
   }
 `;
