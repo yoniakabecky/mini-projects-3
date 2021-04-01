@@ -80,7 +80,7 @@ export default function List({ keywords, setKeywords, ...list }) {
 
 const Root = styled.div`
   position: relative;
-  margin: 25px auto;
+  margin: 24px auto;
 
   @media (max-width: 640px) {
     margin: 40px auto;
@@ -240,7 +240,10 @@ const Tablet = styled.span`
 `;
 
 const Divider = styled.hr`
+  display: none;
+
   @media (max-width: 640px) {
+    display: block;
     background-color: hsl(180, 8%, 52%);
     margin-top: 18px;
     margin-bottom: 16px;

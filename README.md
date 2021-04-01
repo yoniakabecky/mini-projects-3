@@ -29,7 +29,7 @@ To add a filter, the user needs to click on the tablets on the right-side of the
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://miniprojects3.gatsbyjs.io/)
+- Solution URL: [Jump](https://miniprojects3.gatsbyjs.io/)
 
 ## My process
 
