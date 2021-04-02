@@ -45,6 +45,7 @@ const Container = styled.div`
 
 const ListsWrapper = styled.div`
   margin-top: ${({ keywords }) => (keywords ? 76 : 157 + 76)}px;
+  margin-bottom: 120px;
 
   @media (max-width: 640px) {
     margin-top: ${({ keywords }) => (keywords ? 76 : 157 + 76)}px;

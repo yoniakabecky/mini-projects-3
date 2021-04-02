@@ -5,8 +5,8 @@ const Root = styled.div`
   margin: 0 8px;
   border-radius: 12px;
   height: 24px;
-  background-color: ${({ type }) =>
-    type === "featured" ? "hsl(180, 14%, 20%)" : "hsl(180, 29%, 50%)"};
+  background-color: ${({ featured }) =>
+    featured === "featured" ? "hsl(180, 14%, 20%)" : "hsl(180, 29%, 50%)"};
 
   @media (max-width: 640px) {
     margin: 0 4px;
@@ -23,7 +23,7 @@ const Text = styled.p`
 
 export default function Pill({ type }) {
   return (
-    <Root type={type}>
+    <Root featured={type}>
       <Text>{type === "featured" ? "featured" : "new!"}</Text>
     </Root>
   );
